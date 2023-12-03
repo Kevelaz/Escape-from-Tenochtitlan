@@ -1,0 +1,56 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
+body {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  object-position: bottom;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  gap: 5px;
+  grid-template-columns: 40% 40% 40%;
+  grid-template-rows: 80% 20%;
+  grid-template-areas: 
+  "main main main"
+  "side side side";
+}
+main { 
+  grid-area: main;
+  object-position: center;
+  text-align: center;
+  position: relative;
+  background-image: url("https://th.bing.com/th/id/OIG.1_OizHGGS4Zdw8hxRacc?w=1024&h=1024&rs=1&pid=ImgDetMain");
+  background-size: cover;
+  height: 85vh;
+  background-attachment: fixed;
+}
+aside {
+  grid-area: side;
+  text-align: center;
+  height: 20vh;
+  background-color: #ECE2DA;
+}
+main h1 {
+  color:#8B1B00;
+  font-family: 'tilt prism', sans-serif;
+  font-size: 70px
+}
+aside h1 {
+  color:#8B1B00;
+  font-family: 'tilt prism', sans-serif;
+  font-size: 30px; 
+}
+main button {
+  font-family: 'tilt prism', sans-serif;
+  color:#8B1B00;
+  cursor: pointer;
+  font-size: 17px;
+  background-color: #F6E8E6;
+  padding: 20px 32px;
+  border-radius: 70px;
+}
+button:hover{
+  background-color: #8B1B00;
+  color: #ECE2DA;
+}

@@ -43,13 +43,26 @@ Escape from Tenochtitlan will be a choice based game where each turn and choice 
 
 ###### Psuedo code
 // Function to display choices and get player input function going 
-    ex. function display_choices
+    ex. function displayChoices
+        function getUserInput()
 
 // Function to handle the player choices, define what choices players can make and where it will lead to. Will be 3 choices with 3 stages in the game, will be repeated three times (if,else)
+  function handlePlayerChoice
+
 
 // Function to show end game message with the specific background image, will be using image path in order to change image in background and progress in the game (DOM elements)
+   function displayFinalImg 
+   function changeBackdrop
+
 
 // Game loop for Main content such as for the current stage and whether the players chooses the correct path and game conditions(if player moved on or was captured or killed)
+
+  function gameLoop()
     Display choices and get the player input display choices
+
+  function gameOver() function gameComplete()
     Check for game over conditions and for the  game complettion condition
+  Use handlePlayerChoice
     Handle player choice for the current stage
+
+   
