@@ -14,7 +14,6 @@ function genChoices(backgroundImage, topText,textBox,textBoxFontSize,choices) {
   };
 }
 
-
 function showChoices(opciones) {
   const mainEl = document.querySelector('main');
   const topTextEl = document.getElementById('toptext');
@@ -125,17 +124,6 @@ function firstChoices() {
   );
   showChoices(firstChoicesOutcome)
   }
-
-
-function goTlayeccampa () { // Start over button and go right option
-  const tlayeOutcome = genChoices (
-    'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
-    'YOU HAVE BEEN CAPTURED',
-    'Your escape was short-lived, your sacrifice will suffice',
-    '24px',
-  );
-showChoices(tlayeOutcome);
-}
 
 
 function goOpochtli () {
@@ -285,9 +273,9 @@ function goMarsh3 () { //escape
 }
 function jungleDec1 () { // survived 
   const goJung = genChoices (
-    'url()',
+    'url(https://th.bing.com/th/id/OIG.dIPmB_6ERArHCQbnu0wd?w=1024&h=1024&rs=1&pid=ImgDetMain)',
     'YOU SURVIVED',
-    'After the guards saw you went into the thick jungle, they choice to set you free. May Quetzalcoatl guide you in life ',
+    'After the guards saw you go into the thick jungle, they choice to set you free. May Quetzalcoatl guide you in life ',
     '24px',
     
   );
@@ -327,13 +315,114 @@ function goMelauhtiuh () {
     'YOU CONTINUE ON INTO THE NIGHT',
     'Youre still alive, tired and in search of your freedom, where to now?',
     '24px',
-    []
+    [
+      new Choice ('Opochtli', goMela1),
+      new Choice ('Melauhtiuh', goMela2),
+      new Choice ('Tlayeccampa', goMela3),
+    ]
 );
 showChoices(melaOutcome);
 }
-
-
-
+function goMela1 () {
+  const melaUno = genChoices (
+    'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
+    'YOU WERE CAPTURED',
+    'The guards were waiting for you to turn the corner, your sacfrice will suffice',
+    '24px',
+  );
+  showChoices(melaUno);
+}
+function goMela2 () {
+  const melaDos = genChoices (
+    'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
+    'YOU WERE CAPTURED',
+    'You ran straight into a patrol unit! Your sacrifice will suffice',
+    '26px',
+  );
+  showChoices(melaDos);
+}
+function goMela3 () {
+  const melaTres = genChoices (
+    'url(https://th.bing.com/th/id/OIG.DQffgx2YdcPFC7RJmBMm?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
+    'YOU MADE IT TO THE MARKET',
+    'You must make a choice, continue on into the market to blend in or go a different direction?',
+    '22px',
+    [
+      new Choice ('Opochtli', marketDec1),
+      new Choice ('Melauhtiuh', marketDec2),
+      new Choice ('Tlayeccampa', marketDec3),
+    ]
+  );
+  showChoices(melaTres);
+}
+function marketDec1 () {
+  const markUno = genChoices (
+    'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
+    'YOU WERE CAPTURED',
+    'You made a costly mistake and ended up in a dead end! You made it far but not far enough. ',
+    '24px',
+  );
+  showChoices(markUno)
+}
+function marketDec2() {
+  const markDos = genChoices (
+    'url(https://th.bing.com/th/id/OIG.4R9lNp5A06AYPtYH35z9?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
+    'YOU FOUND A CART ',
+    'You decided to blend in and found a cart! But it seems like it is about to leave! Quick! Will you hide in it or find another way out?',
+    '22px',
+    [
+      new Choice('Hide', cartDec1),
+      new Choice('Neither', cartDec2),
+      new Choice('Find another way', cartDec3),
+    ]
+  );
+  showChoices(markDos)
+}
+function marketDec3() {
+  const markTres = genChoices (
+    'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
+    'YOU WERE CAPTURED',
+    'Civilians noticed the guards pursuing you and decided to intervene out of fear! Your determination was impressive.',
+    '22px',
+  );
+  showChoices(markTres)
+}
+function cartDec1 () {
+  const cartUno = genChoices (
+    'url(https://th.bing.com/th/id/OIG.gM9G10pGBDBe0VTshJqb?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
+    'YOU SURVIVED',
+    'You blended in enough to be able to hide in the cart! The cart left the city and you were able to escape the pursuit. May Quetzalcoatl guide you in life ',
+    '18px',
+  )
+  showChoices(cartUno)
+}
+function cartDec2 () {
+  const cartDos = genChoices (
+    'url(https://th.bing.com/th/id/OIG.jUxtSG23mjKCAPlsNZhA?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
+    'YOU DIED',
+    'You decided to not do either. The guards caught up to you and you fought back, They were quick and ended you quickly. May Xolotl guide you.',
+    '20px',
+  )
+  showChoices(cartDos)
+}
+function cartDec3 () {
+  const cartTres = genChoices (
+    'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
+    'YOU WERE CAPTURED',
+    'You decided the cart wasnt safe enough, but sadly that was your only way out. Your sacrifice will be painful and long.',
+    '20px',
+  )
+  showChoices(cartTres)
+}
+function goTlayeccampa () { // Start over button and go right option
+  const tlayeOutcome = genChoices (
+    'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
+    'YOU HAVE BEEN CAPTURED',
+    'Your escape was short-lived, your sacrifice will suffice',
+    '24px',
+  );
+showChoices(tlayeOutcome);
+}
 
 
 
