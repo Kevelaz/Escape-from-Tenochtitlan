@@ -87,3 +87,6 @@ p {
   color:#8B1B00;
   font-size: 16px;
   }
+  #RestartButton {
+    display: none;
+  }
