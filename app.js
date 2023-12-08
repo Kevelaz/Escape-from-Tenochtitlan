@@ -27,7 +27,6 @@ function restartGame () {
 }
 
 function clearChoices() {
-  console.log('Inside clearChoice()')
   const choiceButtons = document.querySelectorAll('.Choices');
   choiceButtons.forEach(function (btn) {
     btn.removeEventListener('click', firstChoices);
@@ -58,30 +57,32 @@ function clearChoices() {
     btn.removeEventListener('click',cartDec1);
     btn.removeEventListener('click',cartDec2);
     btn.removeEventListener('click',cartDec3);
+    
+    btn.textContent = '';
+    btn.style.display = 'inline-block';
+    btn.style.cursor = 'pointer';
+    btn.style.opacity = '1';
+    btn.disabled = false;
 
-    btn.style.display = 'none';
   });
   gameState.playerChoices = [];
   const mainEl = document.querySelector('main');
   const topTextEl = document.getElementById('toptext');
- // const textBoxEl = document.getElementById('textbox');
+  const textBoxEl = document.getElementById('textbox');
   const xtraSpace = document.getElementById('extraspace');
   const restartBtn = document.getElementById
   ('RestartButton');
-  
   mainEl.style.backgroundImage = '';
   mainEl.style.backgroundPosition = '';
   restartBtn.style.display = 'none';
   topTextEl.style.color = '';
   topTextEl.textContent = '';
-  //textBoxEl.textContent = '';
+  textBoxEl.textContent = '';
   xtraSpace.textContent = '';
   xtraSpace.style.fontSize = '';
 }
 
-
 function showChoices(opciones) {
-  console.log(showChoices);
   const mainEl = document.querySelector('main');
   const restartBtn = document.getElementById('RestartButton');
   const topTextEl = document.getElementById('toptext');
@@ -90,8 +91,6 @@ function showChoices(opciones) {
   choiceDos = document.getElementById('choice2');
   choiceTres = document.getElementById('choice3');
   
-
-
   mainEl.style.backgroundImage = opciones.backgroundImage;
   mainEl.style.backgroundPosition = opciones.backgroundPosition;
   restartBtn.style.display = opciones.display
@@ -100,20 +99,23 @@ function showChoices(opciones) {
   textBoxEl.textContent = opciones.textBox;
   textBoxEl.style.fontSize = opciones.textBoxFontSize;
   gameState.choices = opciones.choices;
-  const choiceButtons = document.querySelectorAll('.Choices');
   
   choiceUno.style.display = 'inline-block';
   choiceDos.style.display = 'inline-block';
   choiceTres.style.display = 'inline-block';
 
-    opciones.choices.forEach((choice, index) => {
-    const choiceBtn = document.getElementById(`choice${index + 1}`);
-    choiceBtn.textContent = choice.text;
-    choiceBtn.addEventListener('click', choice.action);
+  opciones.choices.forEach((choice, index) => {
+  const choiceBtn = document.getElementById(`choice${index + 1}`);
+  choiceBtn.textContent = choice.text;
+  choiceBtn.addEventListener('click', choice.action);
   });
 }
-
-
+function updateXtraSpaceTxt(text) {
+  const xtraSpace = document.getElementById('extraspace');
+  if(xtraSpace) {
+    xtraSpace.textContent = text;
+  }
+}
 function revealBtns() {
   let btns = document.querySelectorAll('.Choices');
   btns.forEach(function(btn) {
@@ -123,12 +125,7 @@ function revealBtns() {
 const startBtnEl = document.getElementById('StartButton');
 startBtnEl.addEventListener('click', introScreen);
 
-
-
-
 function introScreen () {
-  console.log('inside introScreen()');
- // document.querySelector('main').style.backgroundImage = 'url(https://th.bing.com/th/id/OIG.ypAWvuLpAbzqPXhfoxAb?w=1024&h=1024&rs=1&pid=ImgDetMain)';
   const startBtnEl = document.getElementById('StartButton');
   startBtnEl.addEventListener('click', revealBtns);
   const topTextEl = document.getElementById('toptext');
@@ -139,8 +136,6 @@ function introScreen () {
   const choiceTres = document.getElementById('choice3');
   const mainEl = document.querySelector('main');
   const restartBtn = document.getElementById('RestartButton');
- //restartBtn.addEventListener('click', restartGame);
-  
   mainEl.style.backgroundImage = 'url(https://th.bing.com/th/id/OIG.ypAWvuLpAbzqPXhfoxAb?w=1024&h=1024&rs=1&pid=ImgDetMain)';
   topTextEl.textContent = 'YOU ARE BEING HELD AS A PRISONER';
   mainEl.style.backgroundPosition = 'center 73%';
@@ -167,7 +162,6 @@ function introScreen () {
 }
 
 function firstChoices() {
-  console.log('inside firstChoices');
   const mainEl = document.querySelector('main');
   const topTextEl = document.getElementById('toptext');
   const textBoxEl = document.getElementById('textbox');
@@ -175,15 +169,13 @@ function firstChoices() {
   const choiceUno = document.getElementById('choice1');
   const choiceDos = document.getElementById('choice2');
   const choiceTres = document.getElementById('choice3');
-
-
-  //document.querySelector('main').style.backgroundImage = 'url(https://i.imgur.com/GXejKL3.png)';
   mainEl.style.backgroundPosition = ' left 73%';
   topTextEl.textContent = 'YOU HAVE ESCAPED';
   topTextEl.style.color = '#F6EEEE';
   textBoxEl.textContent = 'You have escaped! Aztec guards and other parts of the grand Tenochtitlan stand in your way. Where will you go?';
   textBoxEl.style.fontSize = '25px';
-  xtraSpace.style.display = 'none';
+  xtraSpace.textContent = 'Opochtli: Left - Melauhtiuh: Straight - Tlayeccampa: Right';
+  xtraSpace.style.fontSize = '22px';
   choiceUno.style.opacity = '1';
   choiceUno.style.cursor = 'pointer';
   choiceTres.style.opacity = '1';
@@ -198,7 +190,7 @@ function firstChoices() {
   
 
   const firstChoicesOutcome = genChoices (
-    'url()',
+    'url(https://i.imgur.com/GXejKL3_d.jpg?maxwidth=520&shape=thumb&fidelity=high)',
     'none',
     'YOU HAVE ESCAPED',
     'You have escaped! Aztec guards and other parts of the grand Tenochtitlan stand in your way. Where will you go?',
@@ -208,7 +200,6 @@ function firstChoices() {
   gameState.choices = firstChoicesOutcome.choices;
   showChoices(firstChoicesOutcome);
   }
-
 
 function goOpochtli () {
   const opoOutcome = genChoices (
@@ -242,7 +233,7 @@ function goOpo1 () {
   gameState.choices = opoUno.choices;
   showChoices(opoUno);
 }
-function goOpo2 () { // continue straight
+function goOpo2 () { 
   const opoDos = genChoices (
     'url(https://th.bing.com/th/id/OIG.cA3vjQrucNYzQKh8E0My?pid=ImgGn)',
     'none',
@@ -258,7 +249,8 @@ function goOpo2 () { // continue straight
   gameState.choices = opoDos.choices;
   showChoices(opoDos);
 }
-function goOpo3 () { // Start over button
+function goOpo3 () { 
+    updateXtraSpaceTxt('');
   const opoTres = genChoices (
     'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
     'inline-block',
@@ -269,7 +261,8 @@ function goOpo3 () { // Start over button
   );
   showChoices(opoTres);
 }
-function goDock1 (){  // Start over button and dock option 
+function goDock1 (){  
+  updateXtraSpaceTxt('');
   const dockUno = genChoices (
     'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
     'inline-block',
@@ -280,7 +273,8 @@ function goDock1 (){  // Start over button and dock option
   );
   showChoices(dockUno);
 }
-function goDock2 () {  // escape 
+function goDock2 () {  
+  updateXtraSpaceTxt('');
   const dockDos = genChoices (
     'url(https://th.bing.com/th/id/OIG.SPFhqFRnFPj_irzu0.o8?pid=ImgGn)',
     'none',
@@ -296,7 +290,8 @@ function goDock2 () {  // escape
   gameState.choices = dockDos.choices;
   showChoices(dockDos);
 }
-function goDock3 () { // game over button
+function goDock3 () { 
+  updateXtraSpaceTxt('');
   const dockTres = genChoices (
     'url(https://th.bing.com/th/id/OIG.jUxtSG23mjKCAPlsNZhA?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
     'inline-block',
@@ -309,6 +304,7 @@ function goDock3 () { // game over button
 }
 
 function dockAction1 () {
+  updateXtraSpaceTxt('');
   const swimOp = genChoices (
     'url(https://th.bing.com/th/id/OIG.Hw387RgiXp7K6P87WqLc?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
     'inline-block',
@@ -320,6 +316,7 @@ function dockAction1 () {
   showChoices(swimOp);
 }
 function dockAction2 () {
+    updateXtraSpaceTxt('');
   const neitherOp = genChoices (
     'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
     'inline-block',
@@ -331,6 +328,7 @@ function dockAction2 () {
   showChoices(neitherOp);
 }
 function dockAction3 () {
+  updateXtraSpaceTxt('');
   const boatOp = genChoices (
     'url(https://th.bing.com/th/id/OIG.jUxtSG23mjKCAPlsNZhA?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
     'inline-block',
@@ -342,7 +340,8 @@ function dockAction3 () {
   showChoices(boatOp);
 }
 
-function goMarsh1 () { // game over 
+function goMarsh1 () { 
+  updateXtraSpaceTxt('');
   const marshUno = genChoices (
     'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
     'inline-block',
@@ -353,7 +352,8 @@ function goMarsh1 () { // game over
   );
   showChoices(marshUno);
 }
-function goMarsh2 () {  // game over 
+function goMarsh2 () {  
+    updateXtraSpaceTxt('');
   const marshDos = genChoices (
     'url(https://th.bing.com/th/id/OIG.jUxtSG23mjKCAPlsNZhA?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
     'inline-block',
@@ -364,7 +364,7 @@ function goMarsh2 () {  // game over
   );
   showChoices(marshDos);
 }
-function goMarsh3 () { //escape 
+function goMarsh3 () { 
   const marshTres = genChoices (
     'url(https://th.bing.com/th/id/OIG.g8Nz2QltsbKwGpq5On9x?pid=ImgGn)',
     'none',
@@ -380,7 +380,8 @@ function goMarsh3 () { //escape
   gameState.choices = marshTres.choices;
   showChoices(marshTres);
 }
-function jungleDec1 () { // survived 
+function jungleDec1 () { 
+    updateXtraSpaceTxt('');
   const goJung = genChoices (
     'url(https://th.bing.com/th/id/OIG.dIPmB_6ERArHCQbnu0wd?w=1024&h=1024&rs=1&pid=ImgDetMain)',
     'inline-block',
@@ -389,9 +390,10 @@ function jungleDec1 () { // survived
     '24px',
     [],
   );
-  showChoices(goJung)
+  showChoices(goJung);
 }
 function jungleDec2 () {
+    updateXtraSpaceTxt('');
   const nothingOp = genChoices (
     'url(https://th.bing.com/th/id/OIG.jUxtSG23mjKCAPlsNZhA?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
     'inline-block',
@@ -403,6 +405,7 @@ function jungleDec2 () {
   showChoices(nothingOp);
 }
 function jungleDec3 () {
+  updateXtraSpaceTxt('');
   const goBack = genChoices (
     'url(https://th.bing.com/th/id/OIG.jUxtSG23mjKCAPlsNZhA?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
     'inline-block',
@@ -414,17 +417,7 @@ function jungleDec3 () {
   showChoices(goBack);
 }
 
-
-
-
-
-
-
-
-
-
 function goMelauhtiuh () {
-  console.log(goMelauhtiuh);
   const melaOutcome = genChoices (
     'url(https://th.bing.com/th/id/OIG.hbd.Ry8MJkbQ8lSysCCY?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
     'none',
@@ -441,6 +434,7 @@ gameState.choices = melaOutcome.choices;
 showChoices(melaOutcome);
 }
 function goMela1 () {
+  updateXtraSpaceTxt('');
   const melaUno = genChoices (
     'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
     'inline-block',
@@ -452,6 +446,7 @@ function goMela1 () {
   showChoices(melaUno);
 }
 function goMela2 () {
+    updateXtraSpaceTxt('');
   const melaDos = genChoices (
     'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
     'inline-block',
@@ -479,6 +474,7 @@ function goMela3 () {
   showChoices(melaTres);
 }
 function marketDec1 () {
+    updateXtraSpaceTxt('');
   const markUno = genChoices (
     'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
     'YOU WERE CAPTURED',
@@ -506,6 +502,7 @@ function marketDec2() {
   showChoices(markDos);
 }
 function marketDec3() {
+  updateXtraSpaceTxt('');
   const markTres = genChoices (
     'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
     'inline-block',
@@ -517,6 +514,7 @@ function marketDec3() {
   showChoices(markTres);
 }
 function cartDec1 () {
+  updateXtraSpaceTxt('');
   const cartUno = genChoices (
     'url(https://th.bing.com/th/id/OIG.gM9G10pGBDBe0VTshJqb?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
     'inline-block',
@@ -528,6 +526,7 @@ function cartDec1 () {
   showChoices(cartUno);
 }
 function cartDec2 () {
+  updateXtraSpaceTxt('');
   const cartDos = genChoices (
     'url(https://th.bing.com/th/id/OIG.jUxtSG23mjKCAPlsNZhA?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn)',
     'inline-block',
@@ -539,6 +538,7 @@ function cartDec2 () {
   showChoices(cartDos);
 }
 function cartDec3 () {
+  updateXtraSpaceTxt('');
   const cartTres = genChoices (
     'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
     'inline-block',
@@ -549,10 +549,8 @@ function cartDec3 () {
   );
   showChoices(cartTres);
 }
-
-
-
-function goTlayeccampa () { // Start over button and go right option
+function goTlayeccampa () { 
+  updateXtraSpaceTxt('');
   const tlayeOutcome = genChoices (
     'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
     'inline-block',
@@ -563,16 +561,4 @@ function goTlayeccampa () { // Start over button and go right option
   );
 showChoices(tlayeOutcome);
 }
-
-
 document.getElementById('RestartButton').addEventListener('click', restartGame);
-
-
-
-
-
-
-
-
-
-

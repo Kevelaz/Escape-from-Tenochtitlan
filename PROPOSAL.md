@@ -61,7 +61,7 @@ Escape from Tenochtitlan will be a choice based game where each turn and choice 
     Display choices and get the player input display choices
 
   function gameOver() function gameComplete()
-    Check for game over conditions and for the  game complettion condition
+    Check for game over conditions and for the  game completion condition
   Use handlePlayerChoice
     Handle player choice for the current stage
 
