@@ -1,10 +1,10 @@
 class Choice {
-  constructor(text,action) {
+  constructor(text,action,) {
     this.text = text;
     this.action = action;
   }
 }
-let choiceUno,choiceDos,choiceTres;
+
 let gameState = {};
 
 function genChoices(backgroundImage,display, topText,textBox,textBoxFontSize,choices) {
@@ -16,14 +16,6 @@ function genChoices(backgroundImage,display, topText,textBox,textBoxFontSize,cho
     textBoxFontSize,
     choices: choices.map(choice => new Choice(choice.text, choice.action))
   };
-}
-const restartBtn = document.getElementById('RestartButton');
-restartBtn.addEventListener('click', restartGame);
-
-function restartGame () {
-  clearChoices();
-  gameState = {};
-  introScreen();
 }
 
 function clearChoices() {
@@ -57,13 +49,6 @@ function clearChoices() {
     btn.removeEventListener('click',cartDec1);
     btn.removeEventListener('click',cartDec2);
     btn.removeEventListener('click',cartDec3);
-    // Leave out 
-/*btn.textContent = '';
-    btn.style.display = 'inline-block';
-    btn.style.cursor = 'pointer';
-    btn.style.opacity = '1';
-    btn.disabled = false;*/
-// leave out 
   });
   gameState.playerChoices = [];
   const mainEl = document.querySelector('main');
@@ -87,10 +72,7 @@ function showChoices(opciones) {
   const restartBtn = document.getElementById('RestartButton');
   const topTextEl = document.getElementById('toptext');
   const textBoxEl = document.getElementById('textbox');
-  choiceUno = document.getElementById('choice1');
-  choiceDos = document.getElementById('choice2');
-  choiceTres = document.getElementById('choice3');
-  
+
   mainEl.style.backgroundImage = opciones.backgroundImage;
   mainEl.style.backgroundPosition = opciones.backgroundPosition;
   restartBtn.style.display = opciones.display
@@ -100,9 +82,6 @@ function showChoices(opciones) {
   textBoxEl.style.fontSize = opciones.textBoxFontSize;
   gameState.choices = opciones.choices;
   
-  choiceUno.style.display = 'inline-block';
-  choiceDos.style.display = 'inline-block';
-  choiceTres.style.display = 'inline-block';
 
   opciones.choices.forEach((choice, index) => {
   const choiceBtn = document.getElementById(`choice${index + 1}`);
@@ -116,14 +95,22 @@ function updateXtraSpaceTxt(text) {
     xtraSpace.textContent = text;
   }
 }
+
+
 function revealBtns() {
   let btns = document.querySelectorAll('.Choices');
   btns.forEach(function(btn) {
     btn.style.display = 'inline-block';
   })
 }
-const startBtnEl = document.getElementById('StartButton');
-startBtnEl.addEventListener('click', introScreen);
+
+
+function restartGame () {
+  clearChoices();
+  gameState = {};
+  introScreen();
+}
+
 
 function introScreen () {
   const startBtnEl = document.getElementById('StartButton');
@@ -144,7 +131,6 @@ function introScreen () {
   xtraSpace.style.fontSize = '17px';
   textBoxEl.textContent = 'Press "Tequi" to free yourself';
 
-
   choiceDos.textContent = 'Tequi';
   choiceUno.style.opacity = '0.5';
   choiceUno.style.cursor = 'not-allowed';
@@ -164,33 +150,24 @@ function introScreen () {
 function firstChoices() {
   const mainEl = document.querySelector('main');
   const topTextEl = document.getElementById('toptext');
-  const textBoxEl = document.getElementById('textbox');
   const xtraSpace = document.getElementById('extraspace');
   const choiceUno = document.getElementById('choice1');
-  const choiceDos = document.getElementById('choice2');
   const choiceTres = document.getElementById('choice3');
   mainEl.style.backgroundPosition = ' left 73%';
-  topTextEl.textContent = 'YOU HAVE ESCAPED';
+
   topTextEl.style.color = '#F6EEEE';
-  textBoxEl.textContent = 'You have escaped! Aztec guards and other parts of the grand Tenochtitlan stand in your way. Where will you go?';
-  textBoxEl.style.fontSize = '25px';
   xtraSpace.textContent = 'Opochtli: Left - Melauhtiuh: Straight - Tlayeccampa: Right';
   xtraSpace.style.fontSize = '22px';
   choiceUno.style.opacity = '1';
   choiceUno.style.cursor = 'pointer';
   choiceTres.style.opacity = '1';
   choiceTres.style.cursor = 'pointer';
-  choiceUno.textContent = 'Opochtli';
-  choiceDos.textContent = 'Melauhtiuh';
-  choiceTres.textContent = 'Tlayeccampa';
-  
   const opoChoice = new Choice('Opochtli', goOpochtli);
   const melaChoice = new Choice('Melauhtiuh', goMelauhtiuh);
   const tlayeChoice = new Choice('Tlayeccampa', goTlayeccampa);
-  
 
   const firstChoicesOutcome = genChoices (
-    'url(https://i.imgur.com/GXejKL3_d.jpg?maxwidth=520&shape=thumb&fidelity=high)',
+    'url(https://i.imgur.com/QlsYkZ7.png)',
     'none',
     'YOU HAVE ESCAPED',
     'You have escaped! Aztec guards and other parts of the grand Tenochtitlan stand in your way. Where will you go?',
@@ -200,6 +177,13 @@ function firstChoices() {
   gameState.choices = firstChoicesOutcome.choices;
   showChoices(firstChoicesOutcome);
   }
+  const restartBtn = document.getElementById('RestartButton');
+  restartBtn.addEventListener('click', restartGame);
+  const startBtnEl = document.getElementById('StartButton');
+startBtnEl.addEventListener('click', introScreen);
+
+
+
 
 function goOpochtli () {
   const opoOutcome = genChoices (
@@ -213,7 +197,7 @@ function goOpochtli () {
       new Choice('Melauhtiuh', goOpo2),
       new Choice('Tlayeccampa', goOpo3),
     ]
-);
+  );
 gameState.choices = opoOutcome.choices;
 showChoices(opoOutcome);
 }
@@ -255,9 +239,9 @@ function goOpo3 () {
     'url(https://th.bing.com/th/id/OIG.evCNcIkBgTT3UyohMY8X?pid=ImgGn)',
     'inline-block',
     'YOU HAVE BEEN CAPTURED',
-    'You made it far, but not far enough, your sacrifice will be worthy',
+    'You made it far, but not far enough. Your sacrifice will be worthy',
     '24px',
-    [],
+    ['','',''],
   );
   showChoices(opoTres);
 }
@@ -269,7 +253,7 @@ function goDock1 (){
     'YOU HAVE BEEN CAPTURED',
     'You almost made it, huitzilopochtli will appreciate your efforts',
     '24px',
-    [],
+    ['','',''],
   );
   showChoices(dockUno);
 }
@@ -298,7 +282,7 @@ function goDock3 () {
     'YOU DIED',
     'You went straight into a dead-end! The guards caught up to you and decided to make it quick, may Xolotl guide you in the afterlife',
     '21px',
-    [],
+    ['','',''],
   );
   showChoices(dockTres);
 }
@@ -311,7 +295,7 @@ function dockAction1 () {
     'YOU SURVIVED',
     'You chose to swim and the guards with their heavy armor chose not to pursue. May Quetzalcoatl be with you ',
     '24px',
-    [],
+    ['','',''],
   );
   showChoices(swimOp);
 }
@@ -323,7 +307,7 @@ function dockAction2 () {
     'YOU WERE CAPTURED',
     'You saw no way out, huitzilopochtli will appreciate your sacrifice',
     '26px',
-    [],
+    ['','',''],
   );
   showChoices(neitherOp);
 }
@@ -335,7 +319,7 @@ function dockAction3 () {
     'YOU DIED',
     'The boat was suited for two people and you took too long to leave the dock. The guards werent merciful. May Xolotl guide you in the afterlife ',
     '19px',
-    [],
+    ['','',''],
   );
   showChoices(boatOp);
 }
@@ -348,7 +332,7 @@ function goMarsh1 () {
     'YOU HAVE BEEN CAPTURED',
     'The guards caught up to you while you were crossing a muddy part of the swamp, huitzilopochtli will appreciate your efforts ',
     '22px',
-    [],
+    ['','',''],
   );
   showChoices(marshUno);
 }
@@ -360,7 +344,7 @@ function goMarsh2 () {
     'YOU DIED',
     'You drowned trying to swim in the marsh,bad idea. May xolotl guide you in the afterlife',
     '22px',
-    [],
+    ['','',''],
   );
   showChoices(marshDos);
 }
@@ -388,7 +372,7 @@ function jungleDec1 () {
     'YOU SURVIVED',
     'After the guards saw you go into the thick jungle, they choice to set you free. May Quetzalcoatl guide you in life ',
     '24px',
-    [],
+    ['','',''],
   );
   showChoices(goJung);
 }
@@ -400,7 +384,7 @@ function jungleDec2 () {
     'YOU DIED',
     'The guards were not merciful. You went too far to bring back alive',
     '26px',
-    [],
+    ['','',''],
   );
   showChoices(nothingOp);
 }
@@ -412,7 +396,7 @@ function jungleDec3 () {
     'YOU DIED',
     'You decided to face your fate, you  fought until the end. May Xolotl guide you in the afterlife',
     '24px',
-    [],
+    ['','',''],
   );
   showChoices(goBack);
 }
@@ -441,7 +425,7 @@ function goMela1 () {
     'YOU WERE CAPTURED',
     'The guards were waiting for you to turn the corner, your sacfrice will suffice',
     '24px',
-    [],
+    ['','',''],
   );
   showChoices(melaUno);
 }
@@ -453,7 +437,7 @@ function goMela2 () {
     'YOU WERE CAPTURED',
     'You ran straight into a patrol unit! Your sacrifice will suffice',
     '26px',
-    [],
+    ['','',''],
   );
   showChoices(melaDos);
 }
@@ -481,7 +465,7 @@ function marketDec1 () {
     'inline-block',
     'You made a costly mistake and ended up in a dead end! You made it far but not far enough. ',
     '24px',
-    [],
+    ['','',''],
   );
   showChoices(markUno);
 }
@@ -509,7 +493,7 @@ function marketDec3() {
     'YOU WERE CAPTURED',
     'Civilians noticed the guards pursuing you and decided to intervene out of fear! Your determination was impressive.',
     '22px',
-    [],
+    ['','',''],
   );
   showChoices(markTres);
 }
@@ -521,7 +505,7 @@ function cartDec1 () {
     'YOU SURVIVED',
     'You blended in enough to be able to hide in the cart! The cart left the city and you were able to escape the pursuit. May Quetzalcoatl guide you in life ',
     '18px',
-    [],
+    ['','',''],
   );
   showChoices(cartUno);
 }
@@ -533,7 +517,7 @@ function cartDec2 () {
     'YOU DIED',
     'You decided to not do either. The guards caught up to you and you fought back, They were quick and ended you quickly. May Xolotl guide you.',
     '20px',
-    [],
+    ['','','',],
   );
   showChoices(cartDos);
 }
@@ -545,7 +529,7 @@ function cartDec3 () {
     'YOU WERE CAPTURED',
     'You decided the cart wasnt safe enough, but sadly that was your only way out. Your sacrifice will be painful and long.',
     '20px',
-    [],
+    ['','',''],
   );
   showChoices(cartTres);
 }
@@ -557,7 +541,7 @@ function goTlayeccampa () {
     'YOU HAVE BEEN CAPTURED',
     'Your escape was short-lived, your sacrifice will suffice',
     '24px',
-    [],
+    ['', '', ''],
   );
 showChoices(tlayeOutcome);
 }
