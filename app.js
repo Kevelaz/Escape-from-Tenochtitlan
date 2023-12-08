@@ -57,13 +57,13 @@ function clearChoices() {
     btn.removeEventListener('click',cartDec1);
     btn.removeEventListener('click',cartDec2);
     btn.removeEventListener('click',cartDec3);
-    
-    btn.textContent = '';
+    // Leave out 
+/*btn.textContent = '';
     btn.style.display = 'inline-block';
     btn.style.cursor = 'pointer';
     btn.style.opacity = '1';
-    btn.disabled = false;
-
+    btn.disabled = false;*/
+// leave out 
   });
   gameState.playerChoices = [];
   const mainEl = document.querySelector('main');
