@@ -1,3 +1,5 @@
+
+// Sets up framework for button text and for new area
 class Choice {
   constructor(text,action,) {
     this.text = text;
@@ -6,7 +8,7 @@ class Choice {
 }
 
 let gameState = {};
-
+// Framework for each stage and new area
 function genChoices(backgroundImage,display, topText,textBox,textBoxFontSize,choices) {
   return {
     backgroundImage,
@@ -17,7 +19,7 @@ function genChoices(backgroundImage,display, topText,textBox,textBoxFontSize,cho
     choices: choices.map(choice => new Choice(choice.text, choice.action))
   };
 }
-
+// Clears previous choices and path taken // Also completely resets
 function clearChoices() {
   const choiceButtons = document.querySelectorAll('.Choices');
   choiceButtons.forEach(function (btn) {
@@ -66,7 +68,7 @@ function clearChoices() {
   xtraSpace.textContent = '';
   xtraSpace.style.fontSize = '';
 }
-
+// also more frame work 
 function showChoices(opciones) {
   const mainEl = document.querySelector('main');
   const restartBtn = document.getElementById('RestartButton');
@@ -89,6 +91,7 @@ function showChoices(opciones) {
   choiceBtn.addEventListener('click', choice.action);
   });
 }
+// function to edit <p> element above the buttons 
 function updateXtraSpaceTxt(text) {
   const xtraSpace = document.getElementById('extraspace');
   if(xtraSpace) {
@@ -96,7 +99,7 @@ function updateXtraSpaceTxt(text) {
   }
 }
 
-
+//This is the transition action from the pyramid background to intro screen
 function revealBtns() {
   let btns = document.querySelectorAll('.Choices');
   btns.forEach(function(btn) {
@@ -104,14 +107,14 @@ function revealBtns() {
   })
 }
 
-
+// This function clears the choices ,resets game state and brings us back to the intro screen 
 function restartGame () {
   clearChoices();
   gameState = {};
   introScreen();
 }
 
-
+// introscreen with the knife 
 function introScreen () {
   const startBtnEl = document.getElementById('StartButton');
   startBtnEl.addEventListener('click', revealBtns);
@@ -146,7 +149,7 @@ function introScreen () {
 
   revealBtns();
 }
-
+// Jump point to main game screen with the three beginning choices
 function firstChoices() {
   const mainEl = document.querySelector('main');
   const topTextEl = document.getElementById('toptext');
@@ -183,7 +186,7 @@ function firstChoices() {
 startBtnEl.addEventListener('click', introScreen);
 
 
-
+// Meat of the game with all the choices, start over screens , and escape routes 
 
 function goOpochtli () {
   const opoOutcome = genChoices (
